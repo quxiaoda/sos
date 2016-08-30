@@ -6,9 +6,13 @@ let defaultState = {
 const save = (state = defaultState, action) => {
     switch (action.type) {
         case types.SAVE_NUMBER:
-            break;
+            return Object.assign({}, state, {
+                number: action.number,
+            });
         case types.SAVE_TEXT:
-            break;
+            return Object.assign({}, state, {
+                text: action.text,
+            });
         default:
             return state;
     }
