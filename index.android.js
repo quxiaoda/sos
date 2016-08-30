@@ -22,6 +22,8 @@ import {
   TextInput,
 } from 'react-native';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { NativeModules } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
 // import Share, {ShareSheet, Button} from 'react-native-share';
@@ -40,7 +42,7 @@ class SOS extends Component {
         drawerWidth={Dimensions.get('window').width / 5 * 3}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         renderNavigationView={this.renderNavigationView}
-      >
+        >
         <View style={styles.ct}>
           <View style={styles.topbar}>
             <TouchableOpacity
@@ -82,14 +84,16 @@ class SOS extends Component {
         >
         </View>
         <View>
-          <TextInput style={{height:40,borderWidth:1,borderColor:'red',marginTop:10,fontSize:12}}
+          <TextInput style={{height:40,borderColor: 'gray', borderWidth: 1,marginTop:10,fontSize:12}}
             // multiline={true}
+            ref="number"
             keyboardType='numeric'
             maxLength={11}
             placeholderTextColor='#d5d5d5'
+            onEndEditing={(text) => console.log("text==="+text.nativeEvent.text)}
             placeholder='发送手机号'
           />
-          <TextInput style={{height:80,borderWidth:1,borderColor:'red',marginTop:15,fontSize:12}}
+          <TextInput style={{height:80,borderColor: 'gray', borderWidth: 1,marginTop:15,fontSize:12}}
             multiline={true}
             placeholderTextColor='#d5d5d5'            
             placeholder='发送内容'
@@ -98,7 +102,11 @@ class SOS extends Component {
       </View>
     );
   }
-
+  // saveNumber(event) {
+  //   alert(111);
+  //   // alert(this.refs.number.value);
+  //   // alert(event.nativeEvent.text);
+  // }
   sendMsg() {
     // alert(111);
     // SendIntentAndroid.sendSms('+86 13126735500', 'SMS body text here');
