@@ -15,6 +15,6 @@ const save = (state = defaultState, action) => {
             });
         default:
             return state;
-    }
+    } 
 }
 export default save;
